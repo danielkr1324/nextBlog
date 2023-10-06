@@ -1,18 +1,18 @@
 import AllPosts from "../../cmps/posts/all-posts"
+import { postService } from "../../services/post.service"
 
-const DUMMY_DATA = [
-  {
-    slug: "getting-started-with-nextjs",
-    title: "Getting Started with NextJS",
-    image: "getting-started-nextjs.png",
-    excerpt:
-      "NextJS is a React framework for building production-ready web apps. It is built on top of React and is a great choice for beginners.",
-    date: "2023-04-01",
-  },
-]
+function AllPostsPage(props) {
+  return <AllPosts posts={props.posts} />
+}
 
-function AllPostsPage() {
-  return <AllPosts posts={DUMMY_DATA} />
+export function getStaticProps() {
+  const allPosts = postService.getAllPosts()
+
+  return {
+    props: {
+      posts: allPosts,
+    },
+  }
 }
 
 export default AllPostsPage
